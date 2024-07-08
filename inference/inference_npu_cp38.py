@@ -165,7 +165,7 @@ if __name__ == '__main__':
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame, ratio, (dw, dh) = letterbox(frame, new_shape=(IMG_SIZE, IMG_SIZE))
 
-        # Asegúrate de que la imagen tiene 4 dimensiones
+        #Make sure the image is 4-dimensional.
         if frame.ndim == 3:
             frame = np.expand_dims(frame, axis=0)
 
@@ -173,7 +173,7 @@ if __name__ == '__main__':
         outputs = rknn_lite.inference(inputs=[frame])
         print("Inference done.")  # Debugging print
 
-        # Verifica si outputs es None
+        #If outputs is None
         if outputs is None:
             print("Inference failed.")
             break
@@ -192,7 +192,7 @@ if __name__ == '__main__':
         input_data.append(np.transpose(input1_data, (2, 3, 0, 1)))
         input_data.append(np.transpose(input2_data, (2, 3, 0, 1)))
 
-        boxes, classes, scores = yolov5_post_process(input_data)
+        boxes, classes, scores = yolov8_post_process(input_data)
 
         img_1 = ori_frame
         if boxes is not None:
@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
         cv2.putText(img_1, show_fps, (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (100, 255, 0), 1, cv2.LINE_AA)
         print("Showing frame...")  # Debugging print
-        cv2.imshow("yolov5 post process result",img_1)
+        cv2.imshow("yolov8 post process result",img_1)
         
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):

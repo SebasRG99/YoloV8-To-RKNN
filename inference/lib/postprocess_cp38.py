@@ -1,5 +1,5 @@
 import numpy as np
-from ..lib import config
+from lib import config
 
 OBJ_THRESH = config.OBJ_THRESH
 NMS_THRESH = config.NMS_THRESH
